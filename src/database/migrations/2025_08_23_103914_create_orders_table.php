@@ -19,7 +19,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index('user_id');
-            $table->check('total_amount >=0');
 
         });
     }

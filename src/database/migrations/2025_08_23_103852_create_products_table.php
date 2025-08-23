@@ -21,9 +21,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index('category_id');
-            $table->check('price >= 0');
-            $table->check('stock_quantity >= 0');
-
         });
     }
 

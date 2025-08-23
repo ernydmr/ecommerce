@@ -20,8 +20,6 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['order_id','product_id']);
-            $table->check('quantity > 0');
-            $table->check('price >=0');
         });
     }
 
