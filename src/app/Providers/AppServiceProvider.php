@@ -6,19 +6,22 @@ use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
 {
-    /**
-     * Register any application services.
-     */
     public function register(): void
     {
-        //
+        // Hizmet bağları
+        $this->app->bind(
+            \App\Services\Contracts\OrderServiceInterface::class,
+            \App\Services\OrderService::class
+        );
+
+        // Eğer Cart için interface kullandıysan:
+        if (interface_exists(\App\Services\Contracts\CartServiceInterface::class)) {
+            $this->app->bind(
+                \App\Services\Contracts\CartServiceInterface::class,
+                \App\Services\CartService::class
+            );
+        }
     }
 
-    /**
-     * Bootstrap any application services.
-     */
-    public function boot(): void
-    {
-        //
-    }
+    public function boot(): void {}
 }

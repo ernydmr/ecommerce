@@ -8,47 +8,39 @@ use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
+// use Illuminate\Contracts\Queue\ShouldQueue; // Kuyruk kullanacaksan aç
 
-class OrderConfirmationMail extends Mailable
+class OrderConfirmationMail extends Mailable /* implements ShouldQueue */
 {
     use Queueable, SerializesModels;
 
-    /**
-     * Create a new message instance.
-     */
-    public function __construct(public Order $order)
+    public Order $order;
+
+    public function __construct(Order $order)
     {
-        //
+        // Siparişi mailable içine al
+        $this->order = $order->loadMissing('items.product', 'user');
     }
 
-    /**
-     * Get the message envelope.
-     */
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Sipariş Onayı #'.$this->order->id,
+            subject: 'Sipariş Onayı #' . $this->order->id
         );
     }
 
-    /**
-     * Get the message content definition.
-     */
     public function content(): Content
     {
         return new Content(
             markdown: 'mail.order_confirmation',
-            with : [
-                'order' => this->order->loadMissing('items.product'),
+            with: [
+                'order' => $this->order,
+                'user'  => $this->order->user,
+                'items' => $this->order->items,
             ],
         );
     }
 
-    /**
-     * Get the attachments for the message.
-     *
-     * @return array<int, \Illuminate\Mail\Mailables\Attachment>
-     */
     public function attachments(): array
     {
         return [];

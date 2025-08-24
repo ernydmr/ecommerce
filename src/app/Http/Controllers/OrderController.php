@@ -30,6 +30,21 @@ class OrderController extends Controller
         return ApiResponse::success(OrderResource::collection($orders));
     }
 
+    public function updateStatus(\Illuminate\Http\Request $request, \App\Models\Order $order)
+{
+    $data = $request->validate([
+        'status' => 'required|in:PENDING,PAID,SHIPPED,CANCELLED',
+    ]);
+
+    $order->status = $data['status'];
+    $order->save();
+
+    $order->load(['user','items.product']);
+
+    return ApiResponse::success($order, 'Durum güncellendi');
+}
+
+
     public function show(Request $r, \App\Models\Order $order)
     {
         if ($order->user_id !== $r->user()->id) {
