@@ -8,6 +8,7 @@ services:
       - ./src:/var/www/html
     depends_on:
       - db
+      - mailhog
 
   web:
     image: nginx:latest
@@ -34,6 +35,14 @@ services:
       - pgdata:/var/lib/postgresql/data
     ports:
       - "5432:5432"
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    container_name: ecommerce-api-mailhog
+    restart: unless-stopped
+    ports:
+      - "1025:1025"    # SMTP portu
+      - "8025:8025"    # Web UI (http://localhost:8025)    
 
 volumes:
   pgdata:

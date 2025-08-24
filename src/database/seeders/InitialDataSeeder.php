@@ -17,12 +17,12 @@ class InitialDataSeeder extends Seeder
     {
         $admin = User::updateOrCreate(
             ['email' => 'admin@test.com'],
-            ['name'  => 'Admin', 'password' => Hash::make('admin123'), 'role' => 'admin'
+            ['name'  => 'Admin', 'password' => Hash::make('admin1234'), 'role' => 'admin'
             ]);
 
         $user = User::updateOrCreate(
             ['email' => 'user@test.com'],
-            ['name'  => 'User', 'password' => Hash::make('user123'), 'role' => 'user'
+            ['name'  => 'User', 'password' => Hash::make('user1234'), 'role' => 'user'
             ]);
 
         $catNames = ['Elektronik', 'Giyim', 'Kitap'];
