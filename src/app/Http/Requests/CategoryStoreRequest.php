@@ -22,7 +22,7 @@ class CategoryStoreRequest extends BaseApiRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','min = 2'],
+            'name' => ['required','string','min:2'],
             'description' => ['nullable', 'string'],
         ];
     }

@@ -22,9 +22,9 @@ class AuthRegisterRequest extends BaseApiRequest
     public function rules(): array
     {
         return [
-            'name' => ['required','string','min = 2'],
+            'name' => ['required','string','min:2'],
             'email' =>['required','string','unique:users,email'],
-            'password' => ['required','string','min = 8']
+            'password' => ['required','string','min:8']
         ];
     }
 }

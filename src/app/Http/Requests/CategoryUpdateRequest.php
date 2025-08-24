@@ -22,7 +22,7 @@ class CategoryUpdateRequest extends BaseApiRequest
     public function rules(): array
     {
         return [
-            'name' => ['sometimes','string','min = 2'],
+            'name' => ['sometimes','string','min:2'],
             'description' => ['nullable','string'],
         ];
     }
