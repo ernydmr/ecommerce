@@ -34,6 +34,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return ApiResponse::successs(null, 'Kategori Silindi',200);
+        return ApiResponse::success(null, 'Kategori Silindi',200);
     }
 }
