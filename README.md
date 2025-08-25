@@ -92,6 +92,11 @@ docker compose exec -T -e PGPASSWORD=secret db psql -h 127.0.0.1 -U ecommerce -d
 
 ## 8) Postman ile API Testleri
 
+⚠️ **ÖNEMLİ NOT:**  
+**PUT** veya **DELETE** isteklerini test ederken (örn. `{{base_url}}/api/categories/{{category_id}}`),  
+**`category_id`** gibi değişkenler son başarılı **create** isteğinden otomatik alınır.  
+Eğer ilgili kayıt **hiç oluşturulmadıysa** ya da daha önce **silindiyse**, bu istekler hata verebilir.
+
 Repo kökünde `Ecommerce_API_postman.json` koleksiyonu vardır.  
 Postman → Import → File ile yükleyebilirsiniz.
 - **Koleksiyon içinde Collection Variables olarak bazı değişkenler hazır:
